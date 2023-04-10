@@ -24,7 +24,7 @@ os.environ["SERPER_API_KEY"] = "<KEY>"
 tool_names = ["terminal", "requests", "python_repl", "human", "google-serper", "wolfram-alpha"]
 """
 
-tools_names = ["python_repl", "human"]
+tool_names = ["python_repl", "human"]
 
 tools: List[Tool] = load_tools(tool_names, llm=llm)  # type: ignore
 
