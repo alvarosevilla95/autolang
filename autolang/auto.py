@@ -36,7 +36,7 @@ class AutoAgent(BaseModel):
     ) -> "AutoAgent":
         planning_chain = PlanningChain.from_llm(llm, objective, tools=tools, verbose=verbose)
         reviewing_chain = ReviewingChain.from_llm(llm, objective, verbose=verbose)
-        execution_agent = ExecutionAgent.from_llm(llm, objective, tools)
+        execution_agent = ExecutionAgent.from_llm(llm, objective, tools, verbose=verbose)
         learning_chain = LearningChain.from_llm(llm, objective, verbose=verbose)
         return cls(
             objective=objective,

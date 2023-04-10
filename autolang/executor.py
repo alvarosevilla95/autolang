@@ -10,9 +10,9 @@ class ExecutionAgent(BaseModel):
     agent: AgentExecutor = Field(...)
 
     @classmethod
-    def from_llm(cls, llm: BaseLLM, objective: str, tools: List[Tool]) -> "ExecutionAgent":
-        agent = AutonomousAgent.from_llm_and_tools(llm=llm, tools=tools, objective=objective)
-        agent_executor = AgentExecutor.from_agent_and_tools(agent=agent, tools=tools)
+    def from_llm(cls, llm: BaseLLM, objective: str, tools: List[Tool], verbose: bool = True) -> "ExecutionAgent":
+        agent = AutonomousAgent.from_llm_and_tools(llm=llm, tools=tools, objective=objective, verbose=verbose)
+        agent_executor = AgentExecutor.from_agent_and_tools(agent=agent, tools=tools, verbose=verbose)
         return cls(agent=agent_executor)
     
     def execute_task(self, task: str, context: str) -> str:
