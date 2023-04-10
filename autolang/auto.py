@@ -63,7 +63,7 @@ class AutoAgent(BaseModel):
             task = self.pending_list.popleft()
             print_next_task(task)
 
-            result = self.execution_agent.execute_task(self.objective, task["task_name"])
+            result = self.execution_agent.execute_task(task["task_name"], self.memory)
             if not result: result = "Empty result"
             print_task_result(result)
 
@@ -86,5 +86,5 @@ class AutoAgent(BaseModel):
                     context=self.memory)
             self.pending_list = deque(reviewed_tasks)
 
-        final_answer = self.execution_agent.execute_task(self.objective, "Provide the final answer")
+        final_answer = self.execution_agent.execute_task("Provide the final answer", self.memory)
         print_end(final_answer)
