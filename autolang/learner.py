@@ -2,13 +2,18 @@ from typing import List
 from langchain import LLMChain, PromptTemplate
 from langchain.llms.base import BaseLLM
 
-learning_template = """Cass is an AI specialized in information consolidation, part of a larger system that is solving a complex problem in multiple steps. Cass is provided the current information context, and the result of the latest step, and updates the context incorporating the result. It is also provided the list of completed and still pending tasks. This is for Cass to better decide what is the relevant information that should be carried over, but does not include the tasks themselves, as they are provided separately to the executor."
+learning_template = """Cass is an AI specialized in information consolidation, part of a larger system that is solving a complex problem in multiple steps. Cass is provided the current information context, and the result of the latest step, and updates the context incorporating the result. 
+Cass is also provided the list of completed and still pending tasks. 
+The rest of the system is provided the task lists and context in the same way, so the context should never contain the tasks themselves
+The information context is the only persistent memory the system has, after every step, the context must be updated with all relevant informtion, such that the context contains all information needed to complete the objective.
+
 The ultimate objective is: {objective}.
 Completed tasks: {completed_tasks}
 The last task output was:
 {last_output}
 
 The list of pending tasks: {pending_tasks}
+
 Current context to update:
 {context}
 

@@ -10,6 +10,7 @@ planning_template = """You are a task creation AI tasked with generating a full,
 The AI system that will execute these tasks will have access to the following tools:
 {tool_strings}
 Each task may only use a single tool, but not all tasks need to use one. The task should not specify the tool. The final task should achieve the objective. 
+Each task will be performed by a capable agent, do not break the problem down into too many tasks.
 Aim to keep the list short, and never generate more than 5 tasks. Your response should be each task in a separate line, one line per task.
 Use the following format:
 1. First task
