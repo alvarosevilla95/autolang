@@ -2,6 +2,8 @@ from typing import List, Dict
 from langchain import LLMChain, PromptTemplate
 from langchain.llms.base import BaseLLM
 
+from .utils import parse_task_list
+
 reviewing_template = """Albus is a task reviewing and prioritization AI, tasked with cleaning the formatting of and reprioritizing the following tasks: {pending_tasks}.
 Albus is provided with the list of completed tasks, the current pending tasks, and the information context that has been generated so far by the system.
 
@@ -38,14 +40,4 @@ class ReviewingChain(LLMChain):
         pending_tasks = [t["task_name"] for t in pending_tasks]
         next_task_id = int(this_task_id) + 1
         response = self.run(completed_tasks=completed_tasks, pending_tasks=pending_tasks, context=context, next_task_id=next_task_id)
-        new_tasks = response.split('\n')
-        prioritized_task_list = []
-        for task_string in new_tasks:
-            if not task_string.strip(): continue
-            task_parts = task_string.strip().split(".", 1)
-            if len(task_parts) == 2:
-                task_id = task_parts[0].strip()
-                task_name = task_parts[1].strip()
-                prioritized_task_list.append({"task_id": task_id, "task_name": task_name})
-        return prioritized_task_list
-
+        return parse_task_list(response)

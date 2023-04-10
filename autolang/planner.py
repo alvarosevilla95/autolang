@@ -4,6 +4,8 @@ from langchain import LLMChain, PromptTemplate
 from langchain.agents import Tool 
 from langchain.llms.base import BaseLLM
 
+from .utils import parse_task_list
+
 planning_template = """You are a task creation AI tasked with generating a full, exhaustive list of tasks to accomplish the following objective: {objective}.
 The AI system that will execute these tasks will have access to the following tools:
 {tool_strings}
@@ -32,13 +34,4 @@ class PlanningChain(LLMChain):
     
     def generate_tasks(self) -> List[Dict]:
         response = self.run(tool_strings=self.tool_strings)
-        new_tasks = response.split('\n')
-        prioritized_task_list = []
-        for task_string in new_tasks:
-            if not task_string.strip(): continue
-            task_parts = task_string.strip().split(".", 1)
-            if len(task_parts) == 2:
-                task_id = task_parts[0].strip()
-                task_name = task_parts[1].strip()
-                prioritized_task_list.append({"task_id": task_id, "task_name": task_name})
-        return prioritized_task_list
+        return parse_task_list(response)
