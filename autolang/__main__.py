@@ -1,3 +1,4 @@
+import os
 import faiss
 import readline # for better CLI experience
 from typing import List
@@ -14,7 +15,18 @@ objective = input('What is my purpose? ')
 llm: BaseLLM = ChatOpenAI(model_name="gpt-4", temperature=0, request_timeout=120) # type: ignore 
 embeddings = OpenAIEmbeddings() # type: ignore
 
-tools: List[Tool] = load_tools(["python_repl", "human"], llm=llm)  # type: ignore
+"""
+Customize the tools the agent uses here. Here are some others you can add:
+
+os.environ["WOLFRAM_ALPHA_APPID"] = "<APPID>"
+os.environ["SERPER_API_KEY"] = "<KEY>"
+
+tool_names = ["bash", "requests", "python_repl", "human", "google-serper", "wolfram-alpha"]
+"""
+
+tools_names = ["python_repl", "human"]
+
+tools: List[Tool] = load_tools(tool_names, llm=llm)  # type: ignore
 
 index = faiss.IndexFlatL2(1536)
 docstore = InMemoryDocstore({})

@@ -6,7 +6,7 @@ Here's a simple demo: https://twitter.com/pictobit/status/1645504308874563584
 
 ## Running
 
-* (Optional): Customize the tools provided in `__main__.py`
+* (Optional): Customize the tools provided in [__main__.py](autolang/__main__.oy)
 * Install dependencies and run
 ```
 pip install -r requirements.txt
