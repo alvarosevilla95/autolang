@@ -6,7 +6,7 @@ Here's a simple demo: https://twitter.com/pictobit/status/1645504308874563584
 
 ## Running
 
-* (Optional): Customize the tools provided in [\_\_main\_\_.py](autolang/\_\_main\_\_.py)
+* (Optional): Customize the [tools provided to the agent](autolang/\_\_main\_\_.py)
 * Install dependencies and run
 ```
 pip install -r requirements.txt
