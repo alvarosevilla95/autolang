@@ -86,6 +86,5 @@ class AutoAgent(BaseModel):
                     context=self.memory)
             self.pending_list = deque(reviewed_tasks)
 
-        print_end()
         final_answer = self.execution_agent.execute_task(self.objective, "Provide the final answer")
-        print_task_result(final_answer)
+        print_end(final_answer)

@@ -20,8 +20,9 @@ def print_task_result(result):
     color_print("*****TASK RESULT*****", 3)
     print(result)
 
-def print_end():
+def print_end(final_result):
     color_print("*****TASK ENDING*****", 1)
+    print(final_result)
 
 # leave at the end as the codes somehow screw up indenting in the rest of the file
 def color_print(text: str, color: int):
