@@ -16,4 +16,9 @@ class ExecutionAgent(BaseModel):
         return cls(agent=agent_executor)
     
     def execute_task(self, task: str, context: str) -> str:
-        return self.agent.run({"input": task, "context": context})
+        for i in range(3):
+            try:
+                return self.agent.run({"input": task, "context": context})
+            except ValueError:
+                print(f"Value error running executor agent. Will retry {2-i} times")
+        return "Failed to execute task."
