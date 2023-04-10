@@ -1,6 +1,8 @@
 # Autolang
 
-Another take on BabyAGI, powered by langchain.
+Another take on BabyAGI, focused on workflows that complete. Powered by langchain. 
+
+Here's a simple demo: https://twitter.com/pictobit/status/1645504308874563584
 
 ## Running
 
