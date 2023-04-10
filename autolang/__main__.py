@@ -21,7 +21,7 @@ Customize the tools the agent uses here. Here are some others you can add:
 os.environ["WOLFRAM_ALPHA_APPID"] = "<APPID>"
 os.environ["SERPER_API_KEY"] = "<KEY>"
 
-tool_names = ["bash", "requests", "python_repl", "human", "google-serper", "wolfram-alpha"]
+tool_names = ["terminal", "requests", "python_repl", "human", "google-serper", "wolfram-alpha"]
 """
 
 tools_names = ["python_repl", "human"]
