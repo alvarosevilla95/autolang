@@ -14,7 +14,7 @@ objective = input('What is my purpose? ')
 llm: BaseLLM = ChatOpenAI(model_name="gpt-4", temperature=0, request_timeout=120) # type: ignore 
 embeddings = OpenAIEmbeddings() # type: ignore
 
-tools: List[Tool] = load_tools(["human", "llm-math"], llm=llm)  # type: ignore
+tools: List[Tool] = load_tools(["python_repl", "human"], llm=llm)  # type: ignore
 
 index = faiss.IndexFlatL2(1536)
 docstore = InMemoryDocstore({})
