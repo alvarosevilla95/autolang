@@ -80,7 +80,7 @@ class AutoAgent(BaseModel):
             #     ids=[f"result_{task['task_id']}"],
             # )
             reviewed_tasks = self.reviewing_chain.review_tasks(
-                    this_task_id=len(self.complete_list) + 1,
+                    this_task_id=len(self.complete_list),
                     completed_tasks=list(self.complete_list), 
                     pending_tasks=list(self.pending_list), 
                     context=self.memory)

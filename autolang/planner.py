@@ -7,7 +7,12 @@ from langchain.llms.base import BaseLLM
 planning_template = """You are a task creation AI tasked with generating a full, exhaustive list of tasks to accomplish the following objective: {objective}.
 The AI system that will execute these tasks will have access to the following tools:
 {tool_strings}
-Each task may only use a single tool, but not all tasks need to use one. The task should not specify the tool. The final task should achieve the objective. Aim to keep the list short, and never generate more than 5 tasks. Your response should be each task in a separate line, one line per task."""
+Each task may only use a single tool, but not all tasks need to use one. The task should not specify the tool. The final task should achieve the objective. 
+Aim to keep the list short, and never generate more than 5 tasks. Your response should be each task in a separate line, one line per task.
+Use the following format:
+1. First task
+2. Second task
+"""
 
 planning_prompt = lambda objective: PromptTemplate(
         template=planning_template,
