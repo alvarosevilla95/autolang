@@ -74,11 +74,11 @@ class AutoAgent(BaseModel):
                 completed_tasks=list(self.complete_list),
                 pending_tasks=[t["task_name"] for t in self.pending_list],
             )
-            self.vectorstore.add_texts(
-                texts=[result],
-                metadatas=[{"task": task["task_name"]}],
-                ids=[f"result_{task['task_id']}"],
-            )
+            # self.vectorstore.add_texts(
+            #     texts=[result],
+            #     metadatas=[{"task": task["task_name"]}],
+            #     ids=[f"result_{task['task_id']}"],
+            # )
             reviewed_tasks = self.reviewing_chain.review_tasks(
                     this_task_id=len(self.complete_list) + 1,
                     completed_tasks=list(self.complete_list), 
