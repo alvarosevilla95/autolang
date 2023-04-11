@@ -6,20 +6,35 @@ Here's a simple demo: https://twitter.com/pictobit/status/1645504308874563584
 
 ## Running
 
-* (Optional): Customize the [tools provided to the agent](autolang/\_\_main\_\_.py)
-* Install dependencies and run
-```
+To run Autolang, follow these steps:
+
+(Optional) Customize the [tools provided to the agent](autolang/\_\_main\_\_.py)
+
+Install dependencies:
+```sh
 pip install -r requirements.txt
+```
+
+Copy the `.env.example` file to `.env,` then edit it:
+```sh
+cp .env.example .env
+```
+
+Run the script:
+```sh
 python -m autolang
 ```
-Or run with docker:
-```
+
+Alternatively, run with Docker:
+```sh
 ./run_docker.sh
 ```
 ## Architecture
 
+Autolang uses four main components:
+
 <p align="center">
-    <img src="https://github.com/alvarosevilla95/autolang/blob/master/assets/diagram.svg">
+    <img src="assets/diagram.svg">
 </p>
 
 ### Planner
