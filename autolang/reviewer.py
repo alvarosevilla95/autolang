@@ -1,3 +1,4 @@
+from collections import deque
 from typing import List, Dict 
 from langchain import LLMChain, PromptTemplate
 from langchain.llms.base import BaseLLM
@@ -36,8 +37,7 @@ class ReviewingChain(LLMChain):
     def from_llm(cls, llm: BaseLLM, objective: str, verbose: bool = True) -> "ReviewingChain":
         return cls(prompt=reviewing_prompt(objective), llm=llm, verbose=verbose)
 
-    def review_tasks(self, this_task_id: int, completed_tasks: List[str], pending_tasks: List[Dict], context: str) -> List[Dict]:
-        pending_tasks = [t["task_name"] for t in pending_tasks]
+    def review_tasks(self, this_task_id: int, completed_tasks: List[str], pending_tasks: List[str], context: str) -> deque[Dict]:
         next_task_id = int(this_task_id) + 1
         response = self.run(completed_tasks=completed_tasks, pending_tasks=pending_tasks, context=context, next_task_id=next_task_id)
-        return parse_task_list(response)
+        return deque(parse_task_list(response))

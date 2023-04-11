@@ -22,8 +22,8 @@ class AutoAgent(BaseModel):
     vectorstore: Any = Field(...)
 
     memory: str = Field("", init=False)
-    complete_list: deque = Field(default_factory=deque)
-    pending_list: deque = Field(default_factory=deque)
+    complete_list: List[Dict[str, str]] = Field(default_factory=list)
+    pending_list: deque[Dict[str, str]] = Field(default_factory=deque)
 
     @classmethod
     def from_llm_and_objectives(
@@ -71,20 +71,14 @@ class AutoAgent(BaseModel):
             self.memory = self.learning_chain.update_memory(
                 memory=self.memory,
                 observation=result,
-                completed_tasks=list(self.complete_list),
+                completed_tasks=[t["task_name"] for t in self.complete_list],
                 pending_tasks=[t["task_name"] for t in self.pending_list],
             )
-            # self.vectorstore.add_texts(
-            #     texts=[result],
-            #     metadatas=[{"task": task["task_name"]}],
-            #     ids=[f"result_{task['task_id']}"],
-            # )
-            reviewed_tasks = self.reviewing_chain.review_tasks(
+            self.pending_list = self.reviewing_chain.review_tasks(
                     this_task_id=len(self.complete_list),
-                    completed_tasks=list(self.complete_list), 
-                    pending_tasks=list(self.pending_list), 
+                    completed_tasks=[t["task_name"] for t in self.complete_list], 
+                    pending_tasks=[t["task_name"] for t in self.pending_list], 
                     context=self.memory)
-            self.pending_list = deque(reviewed_tasks)
 
         final_answer = self.execution_agent.execute_task("Provide the final answer", self.memory)
         print_end(final_answer)
