@@ -2,3 +2,4 @@ faiss_cpu==1.7.3
 langchain==0.0.136
 pydantic==1.10.7
 openai==0.27.4
+python-dotenv==1.0.0
