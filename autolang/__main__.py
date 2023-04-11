@@ -9,10 +9,22 @@ from langchain.embeddings import OpenAIEmbeddings
 from langchain.llms.base import BaseLLM 
 
 from .auto import AutoAgent
+from dotenv import load_dotenv
+
+# Load default environment variables (.env)
+load_dotenv()
+
+# API Keys
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", default="")
+assert OPENAI_API_KEY, "OPENAI_API_KEY environment variable is missing from .env"
+
+OPENAI_API_MODEL = os.getenv("OPENAI_API_MODEL", default="gpt-3.5-turbo")
+assert OPENAI_API_MODEL, "OPENAI_API_MODEL environment variable is missing from .env"
 
 objective = input('What is my purpose? ')
 
-llm: BaseLLM = ChatOpenAI(model_name="gpt-4", temperature=0, request_timeout=120) # type: ignore 
+
+llm: BaseLLM = ChatOpenAI(model_name=OPENAI_API_MODEL, temperature=0, request_timeout=120) # type: ignore 
 embeddings = OpenAIEmbeddings() # type: ignore
 
 """
